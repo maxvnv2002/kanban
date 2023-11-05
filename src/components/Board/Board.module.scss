@@ -1,3 +1,6 @@
-.board {
+@import "src/assets/styles/main";
 
+.board {
+  padding-top: $spacingXL;
+  background-color: $lightGray;
 }

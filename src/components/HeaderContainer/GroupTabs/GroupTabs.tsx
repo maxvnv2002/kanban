@@ -1,41 +1,52 @@
 import {FC} from "react";
 import classes from './GroupTabs.module.scss'
-import {Container, Tabs} from "@mantine/core";
+import {Container, Loader, Tabs} from "@mantine/core";
 import '@mantine/core/styles.css';
-const tabs = [
-    'Home',
-    'Orders',
-    'Education',
-    'Community',
-    'Forums',
-    'Support',
-    'Account',
-    'Helpdesk',
-];
+import {observer} from "mobx-react-lite";
+import tablesStore from "../../../store/tablesStore";
+
 
 const GroupTabs: FC = () => {
-    const items = tabs.map((tab) => (
-        <Tabs.Tab value={tab} key={tab}>
-            {tab}
+    const { tables, activeTableName, setActiveTableName } = tablesStore
+
+    const items = tables.map((tab) => (
+        <Tabs.Tab
+            value={tab.name}
+            key={tab.name}
+            onClick={() => setActiveTableName(tab.name)}
+        >
+            {tab.name}
         </Tabs.Tab>
     ));
+
+    if (!tables.length) {
+        return (
+            <Container size='md'>
+                <Tabs>
+                    <Loader size={43}/>
+                </Tabs>
+            </Container>
+        )
+    }
 
     return (
         <div className={classes.groupTabs}>
             <Container size='md'>
                 <Tabs
-                    defaultValue={''}
+                    defaultValue={activeTableName}
                     classNames={{
                         root: classes.tabs,
                         list: classes.tabsList,
                         tab: classes.tab
                     }}
                 >
-                    <Tabs.List>{items}</Tabs.List>
+                    <Tabs.List>{
+                        tables.length ? items : '123'
+                    }</Tabs.List>
                 </Tabs>
             </Container>
         </div>
     );
 };
 
-export default GroupTabs;
+export default observer(GroupTabs);

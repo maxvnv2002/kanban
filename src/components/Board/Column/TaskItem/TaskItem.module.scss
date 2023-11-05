@@ -1,0 +1,14 @@
+@import '/src/assets/styles/main';
+
+.taskItem {
+  position: relative;
+  background: $white;
+  box-shadow: 0px 0px 1px 1px $lightGray;
+  .title {
+    width: calc(90% - $spacingXL);
+    color: $black;
+  }
+  .text {
+    color: $gray;
+  }
+}

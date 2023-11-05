@@ -1,0 +1,17 @@
+@import '/src/assets/styles/main';
+
+.timeDue {
+  display: flex;
+  align-items: center;
+  margin-top: $spacingSM;
+  color: $statusRed;
+  .warning {
+    color: $statusRed;
+  }
+  .average {
+    color: $statusYellow;
+  }
+  .calm {
+    color: $statusBlue;
+  }
+}

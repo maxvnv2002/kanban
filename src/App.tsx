@@ -1,13 +1,11 @@
 import './App.scss'
 import '@mantine/core/styles.css';
-import HeaderContainer from "./components/HeaderContainer/HeaderContainer";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
 
   return (
-    <div>
-      <HeaderContainer/>
-    </div>
+    <AppRoutes/>
   )
 }
 
