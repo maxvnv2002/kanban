@@ -5,13 +5,16 @@
   align-items: center;
   margin-top: $spacingSM;
   color: $statusRed;
-  .warning {
+  .overdue {
     color: $statusRed;
   }
-  .average {
+  .warning {
     color: $statusYellow;
   }
-  .calm {
+  .average {
     color: $statusBlue;
+  }
+  .calm {
+    color: $gray;
   }
 }

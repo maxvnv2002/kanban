@@ -18,14 +18,14 @@ const TaskItem: FC<TaskItemProps> = ({id}) => {
     const { tasks } = tablesStore
     const currTask = tasks.find(task => task.id === id)
 
-    const date = new Date()
+    const dueDate = new Date()
 
     return (
         <Card withBorder radius="md" className={classes.taskItem} pl={"lg"}>
             <TaskTitle value={currTask?.title} className={classes.title}/>
             <TaskText value={currTask?.text} className={classes.text}/>
             <PriorityBadge priority={priorities.extraLow}/>
-            <TaskDueTime dueTime={date}/>
+            <TaskDueTime dueTime={dueDate}/>
         </Card>
     );
 };

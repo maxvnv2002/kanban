@@ -1,14 +1,16 @@
 import {FC} from 'react';
-import {Statuses} from "../../../../../../constants/statuses";
-import {IconAlertTriangle, IconCircleDot, IconClockHour4} from "@tabler/icons-react";
+import {Statuses} from "../../../../../../constants/Statuses";
+import {IconAlertTriangle, IconCircleDot, IconClockCancel, IconClockHour4} from "@tabler/icons-react";
 
 interface StatusIconProps {
     status: Statuses
-    className: string
+    className?: string
 }
 
 const StatusIcon: FC<StatusIconProps> = ({status, className}) => {
     switch (status) {
+        case Statuses.overdue:
+            return <IconClockCancel className={className}/>
         case Statuses.warning:
             return <IconAlertTriangle className={className}/>
         case Statuses.average:
