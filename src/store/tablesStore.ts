@@ -1,8 +1,7 @@
 import {makeObservable, observable} from "mobx";
-import {TTables, TTasksList} from "../types/types";
+import {ITable, TTables, TTasksList} from "../types/types";
 import {getStorageByKey} from "../helpers/getStorageByKey";
 import {storageKeys} from "../constants/storageKeys";
-import {initialItems, initialTasks} from "../helpers/initialItems";
 import {setStorage} from "../helpers/setStorage";
 
 
@@ -39,6 +38,14 @@ class TablesStore {
     }
     setActiveTableName = (name: string) => {
         this.activeTableName = name
+    }
+    createNewTable = (name: string) => {
+        const newTable: ITable = {
+            name: name,
+            tasks: []
+        }
+        this.tables.push(newTable)
+        setStorage(storageKeys.tables, this.tables)
     }
 }
 

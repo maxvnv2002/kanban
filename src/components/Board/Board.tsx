@@ -14,7 +14,6 @@ const Board: FC<BoardProps> = ({table}) => {
     if (!table) {
         return <Loader size={100}/>
     }
-    console.log(table)
     return (
         <div className={classes.board}>
             <Container size='xl'>
