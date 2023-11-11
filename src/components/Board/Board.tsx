@@ -19,7 +19,7 @@ const Board: FC<BoardProps> = ({table}) => {
             <Container size='xl'>
                 <SimpleGrid cols={4} spacing={10}>
                     {table.tasks.map((itemsRow, index) => (
-                        <Column key={index} row={itemsRow}/>
+                        <Column key={index} colIndex={index} column={itemsRow}/>
                     ))}
                 </SimpleGrid>
             </Container>

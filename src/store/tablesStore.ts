@@ -62,6 +62,21 @@ class TablesStore {
         setStorage(storageKeys.tables, this.tables)
     }
 
+    addNewTask = (columnIndex: number, newTaskObj: ITask) => {
+        const activeTableIndex: number = this.tables.findIndex(
+            table => table.name === this.activeTableName
+        )
+        this.tasks.push(newTaskObj)
+
+        this.tables = this.tables.slice()
+
+
+        const activeTable = this.tables[activeTableIndex]
+        const currentColumn = activeTable.tasks[columnIndex]
+        currentColumn.push(newTaskObj.id)
+    // .tasks[columnIndex].push(newTaskObj.id)
+    }
+
 }
 
 export default new TablesStore();
