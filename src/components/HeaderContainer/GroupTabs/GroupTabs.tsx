@@ -5,18 +5,23 @@ import '@mantine/core/styles.css';
 import {observer} from "mobx-react-lite";
 import tablesStore from "../../../store/tablesStore";
 import {ADD_NEW} from "../../../constants/constants";
-import {useNavigate} from "react-router-dom";
-import {routes} from "../../../routes/contants/routes";
-import AddNewTab from "./AddNewTab/AddNewTab";
+
+import {IconCirclePlus} from "@tabler/icons-react";
+import {useDisclosure} from "@mantine/hooks";
+import NewTabDialog from "./NewTabDialog/NewTabDialog";
+import classNames from "classnames";
+import TabMenu from "./TabMenu/TabMenu";
 
 
 const GroupTabs: FC = () => {
     const { tables, activeTableName, setActiveTableName } = tablesStore
-    const navigate = useNavigate()
+    const [isDialogOpen, {
+        toggle: toggleDialog,
+        close: closeDialog
+    }] = useDisclosure(false)
 
     function tabClickHandler(name: string) {
         setActiveTableName(name)
-        navigate(routes.root)
     }
 
     const items = tables.map((tab) => (
@@ -25,22 +30,29 @@ const GroupTabs: FC = () => {
             key={tab.name}
             onClick={() => tabClickHandler(tab.name)}
         >
-            {tab.name}
+            <span>{tab.name}</span>
+            <TabMenu tableName={tab.name}/>
         </Tabs.Tab>
     ));
 
-    function addNewTable(name: string) {
-        setActiveTableName(name)
-        navigate(routes.newTable)
-    }
 
-    items.push(
+    const tabIconClasses = classNames({
+        [classes.addNew]: true,
+        [classes.focused]: isDialogOpen
+    })
+
+     items.push(
         <Tabs.Tab
             value={ADD_NEW}
             key={ADD_NEW}
-            onClick={() => addNewTable(ADD_NEW)}
+            className={tabIconClasses}
+            onClick={toggleDialog}
         >
-            <AddNewTab/>
+            <IconCirclePlus/>
+            <NewTabDialog
+                isOpened={isDialogOpen}
+                closeHandler={closeDialog}
+            />
         </Tabs.Tab>
     )
 
@@ -58,7 +70,9 @@ const GroupTabs: FC = () => {
         <div className={classes.groupTabs}>
             <Container size='md'>
                 <Tabs
+                    variant={'outline'}
                     defaultValue={activeTableName}
+                    value={activeTableName}
                     classNames={{
                         root: classes.tabs,
                         list: classes.tabsList,

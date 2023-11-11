@@ -1,0 +1,11 @@
+@import 'src/assets/styles/main';
+
+.dropdown {
+  .icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .delete {
+    color: $statusRed;
+  }
+}

@@ -5,6 +5,7 @@ import {observer} from "mobx-react-lite";
 
 const BoardPage: FC = () => {
     const {tables, activeTableName} = tablesStore
+
     const activeTable = tables.find(table => table.name === activeTableName)
 
 

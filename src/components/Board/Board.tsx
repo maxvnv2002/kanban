@@ -23,6 +23,7 @@ const Board: FC<BoardProps> = ({table}) => {
                     ))}
                 </SimpleGrid>
             </Container>
+
         </div>
     );
 };

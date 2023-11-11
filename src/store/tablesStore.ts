@@ -1,8 +1,9 @@
-import {makeObservable, observable} from "mobx";
+import {action, makeAutoObservable, makeObservable, observable} from "mobx";
 import {ITable, TTables, TTasksList} from "../types/types";
 import {getStorageByKey} from "../helpers/getStorageByKey";
 import {storageKeys} from "../constants/storageKeys";
 import {setStorage} from "../helpers/setStorage";
+import {initialItems, initialTasks} from "../helpers/initialItems";
 
 
 class TablesStore {
@@ -10,12 +11,9 @@ class TablesStore {
     tables: TTables = []
     tasks: TTasksList = []
     activeTableName: string = ''
+
     constructor() {
-        makeObservable(this, {
-            tables: observable,
-            tasks: observable,
-            activeTableName: observable,
-        })
+        makeAutoObservable(this)
     }
 
     autoRun = () => {
@@ -37,16 +35,33 @@ class TablesStore {
         }
     }
     setActiveTableName = (name: string) => {
-        this.activeTableName = name
+        if (this.activeTableName !== name) {
+            this.activeTableName = name
+        }
     }
-    createNewTable = (name: string) => {
+    createNewTable = (tableName: string) => {
         const newTable: ITable = {
-            name: name,
-            tasks: []
+            name: tableName,
+            tasks: [
+                [],
+                [],
+                [],
+                []
+            ]
         }
         this.tables.push(newTable)
         setStorage(storageKeys.tables, this.tables)
     }
+
+    deleteTable = (tableName: string) => {
+        const editedTablesList = this.tables.filter(table => table.name !== tableName)
+        this.tables = editedTablesList
+
+        this.activeTableName = this.tables[0].name
+
+        setStorage(storageKeys.tables, this.tables)
+    }
+
 }
 
 export default new TablesStore();

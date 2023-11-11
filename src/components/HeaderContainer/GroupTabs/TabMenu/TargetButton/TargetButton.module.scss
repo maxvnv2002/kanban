@@ -1,0 +1,11 @@
+@import '/src/assets/styles/main';
+
+.target {
+  width: 1rem;
+  height: 1rem;
+  margin-left: $spacingXS;
+  transition: all 0.25s ease;
+  &:hover {
+    color: $purple;
+  }
+}
