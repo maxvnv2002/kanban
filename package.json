@@ -15,8 +15,10 @@
     "@mantine/hooks": "^7.1.7",
     "@mantine/modals": "^7.1.7",
     "@mantine/notifications": "^7.1.7",
+    "@tabler/icons-react": "^2.40.0",
     "ag-grid-community": "^30.2.0",
     "ag-grid-react": "^30.2.0",
+    "classnames": "^2.3.2",
     "mobx": "^6.10.2",
     "mobx-react-lite": "^4.0.5",
     "react": "^18.2.0",
@@ -35,6 +37,7 @@
     "postcss": "^8.4.31",
     "postcss-preset-mantine": "^1.9.0",
     "postcss-simple-vars": "^7.0.1",
+    "sass": "^1.69.5",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
   }

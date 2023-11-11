@@ -1,0 +1,20 @@
+@import '/src/assets/styles/main';
+
+.timeDue {
+  display: flex;
+  align-items: center;
+  margin-top: $spacingSM;
+  color: $statusRed;
+  .overdue {
+    color: $statusRed;
+  }
+  .warning {
+    color: $statusYellow;
+  }
+  .average {
+    color: $statusBlue;
+  }
+  .calm {
+    color: $gray;
+  }
+}
