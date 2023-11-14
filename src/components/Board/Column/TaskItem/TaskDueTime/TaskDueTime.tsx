@@ -1,10 +1,9 @@
 import classes from './TaskDueTime.module.scss'
 import {Text} from "@mantine/core";
 import {FC} from "react";
-import StatusIcon from "./StatusIcon/StatusIcon";
 import {Statuses} from "../../../../../constants/Statuses";
 import {getTaskStatus} from "./helpers/getTaskStatus";
-import * as classNames from "classnames";
+import StatusIcon from "./StatusIcon/StatusIcon";
 
 interface TaskDueTimeProps {
     dueTime: Date
@@ -12,11 +11,13 @@ interface TaskDueTimeProps {
 
 const TaskDueTime: FC<TaskDueTimeProps> = ({dueTime}) => {
     const currentTime = new Date()
+    const dueTimeDate = new Date(dueTime)
 
-    const dueMonth = dueTime.toLocaleString('en', { month: 'long' })
-    const dueDateOutput = `${dueTime.getDate()} ${dueMonth}`
 
-    const taskStatus = getTaskStatus(currentTime, dueTime)
+    const dueMonth = dueTimeDate.toLocaleString('en', { month: 'long' })
+    const dueDateOutput = `${dueTimeDate.getDate()} ${dueMonth}`
+
+    const taskStatus = getTaskStatus(currentTime, dueTimeDate)
     const statusClasses = classes[Statuses[taskStatus]]
 
     return (

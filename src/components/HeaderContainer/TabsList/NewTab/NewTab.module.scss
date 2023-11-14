@@ -1,0 +1,8 @@
+@import '/src/assets/styles/main';
+
+.newTab {
+  &.focused {
+    background-color: $white;
+    color: $black;
+  }
+}

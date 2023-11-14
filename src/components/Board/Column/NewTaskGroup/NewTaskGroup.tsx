@@ -1,4 +1,4 @@
-import {Button, Drawer, TextInput} from "@mantine/core";
+import {Button} from "@mantine/core";
 import {useDisclosure} from "@mantine/hooks";
 import {FC} from "react";
 import classes from './NewTaskGroup.module.scss'

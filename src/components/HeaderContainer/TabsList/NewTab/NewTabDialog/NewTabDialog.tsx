@@ -1,6 +1,6 @@
 import {Button, Group, Modal, TextInput} from "@mantine/core";
 import {FC, useState} from "react";
-import tablesStore from "../../../../store/tablesStore";
+import tablesStore from "../../../../../store/tablesStore";
 
 interface NewTabDialogProps {
     isOpened: boolean

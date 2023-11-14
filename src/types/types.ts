@@ -16,5 +16,13 @@ export type TTasksList = ITask[]
 export interface ITask {
     id: number,
     title: string,
-    text: string
+    description: string,
+    dueDate: Date,
+    priority: IPriority
+}
+
+
+export interface IPriority {
+    color: string,
+    content: string
 }

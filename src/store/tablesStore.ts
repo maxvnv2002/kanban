@@ -1,9 +1,9 @@
-import {action, makeAutoObservable, makeObservable, observable} from "mobx";
-import {ITable, TTables, TTasksList} from "../types/types";
+import {makeAutoObservable} from "mobx";
+import {ITable, ITask, TTables, TTasksList} from "../types/types";
 import {getStorageByKey} from "../helpers/getStorageByKey";
 import {storageKeys} from "../constants/storageKeys";
 import {setStorage} from "../helpers/setStorage";
-import {initialItems, initialTasks} from "../helpers/initialItems";
+import {getMaxTaskIndex} from "../helpers/getMaxTaskIndex";
 
 
 class TablesStore {
@@ -50,6 +50,8 @@ class TablesStore {
             ]
         }
         this.tables.push(newTable)
+        this.activeTableName = tableName
+
         setStorage(storageKeys.tables, this.tables)
     }
 
@@ -57,24 +59,33 @@ class TablesStore {
         const editedTablesList = this.tables.filter(table => table.name !== tableName)
         this.tables = editedTablesList
 
-        this.activeTableName = this.tables[0].name
+        if (this.tables.length) {
+            this.activeTableName = this.tables[0].name
+        }
 
         setStorage(storageKeys.tables, this.tables)
     }
 
-    addNewTask = (columnIndex: number, newTaskObj: ITask) => {
+    addNewTask = (columnIndex: number, receivedTask: Omit<ITask, "id">) => {
         const activeTableIndex: number = this.tables.findIndex(
             table => table.name === this.activeTableName
         )
-        this.tasks.push(newTaskObj)
+        const newTask: ITask = {
+            id: getMaxTaskIndex(),
+            ...receivedTask
+        }
+
+        this.tasks.push(newTask)
 
         this.tables = this.tables.slice()
 
 
         const activeTable = this.tables[activeTableIndex]
         const currentColumn = activeTable.tasks[columnIndex]
-        currentColumn.push(newTaskObj.id)
-    // .tasks[columnIndex].push(newTaskObj.id)
+        currentColumn.push(newTask.id)
+
+        setStorage(storageKeys.tables, this.tables)
+        setStorage(storageKeys.tasks, this.tasks)
     }
 
 }

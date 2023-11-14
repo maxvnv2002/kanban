@@ -1,19 +1,21 @@
-export const priorities = {
+import {IPriority} from "../types/types";
+
+export const priorities: IPrioritiesList = {
     'extraLow': {
-        color: 'gray',
-        content: 'extra low'
+        color: '#8E8E93',
+        content: 'Extra low'
     },
     'low': {
-        color: 'blue',
-        content: 'low',
+        color: '#5AC8FA',
+        content: 'Low',
     },
     'medium': {
-        color: 'yellow',
-        content: 'medium'
+        color: '#FFCC00',
+        content: 'Medium'
     },
     'hard': {
-        color: 'red',
-        content: 'hard'
+        color: '#FF3B30',
+        content: 'Hard'
     }
 }
 
@@ -22,8 +24,4 @@ export interface IPrioritiesList {
     low: IPriority,
     medium: IPriority,
     hard: IPriority
-}
-export interface IPriority {
-    color: string,
-    content: string
 }

@@ -1,7 +1,7 @@
 import {Badge} from "@mantine/core";
 import {FC} from "react";
-import {IPriority} from "../../../../../constants/priorities";
 import classes from './PriorityBadge.module.scss';
+import {IPriority} from "../../../../../types/types";
 interface PriorityBadgeProps {
     priority: IPriority
 }
