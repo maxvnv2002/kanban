@@ -1,14 +1,14 @@
 import HeaderBar from "./HeaderBar/HeaderBar";
 import classes from './HeaderContainer.module.scss'
-import TabsList from "./TabsList/TabsList";
+import TabsContainer from "./TabsContainer/TabsContainer.tsx";
 
 
 const HeaderContainer = () => {
     return (
-        <div className={classes.header}>
+        <header className={classes.header}>
             <HeaderBar/>
-            <TabsList/>
-        </div>
+            <TabsContainer/>
+        </header>
     );
 };
 

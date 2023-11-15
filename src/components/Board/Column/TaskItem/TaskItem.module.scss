@@ -3,12 +3,17 @@
 .taskItem {
   position: relative;
   background: $white;
-  box-shadow: 0px 0px 1px 1px $lightGray;
+  box-shadow: 1px 1px 5px 1px $lightGray;
+  transition: all 0.25s ease;
   .title {
     width: calc(90% - $spacingXL);
     color: $black;
   }
   .text {
     color: $blue-gray;
+  }
+  &.dragging {
+    box-shadow: 1px 1px 5px 1px $statusGray;
+    background: $lightGray;
   }
 }

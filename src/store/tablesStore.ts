@@ -1,5 +1,5 @@
 import {makeAutoObservable} from "mobx";
-import {ITable, ITask, TTables, TTasksList} from "../types/types";
+import {IDragCord, ITable, ITask, TTables, TTasksList} from "../types/types";
 import {getStorageByKey} from "../helpers/getStorageByKey";
 import {storageKeys} from "../constants/storageKeys";
 import {setStorage} from "../helpers/setStorage";
@@ -86,6 +86,34 @@ class TablesStore {
 
         setStorage(storageKeys.tables, this.tables)
         setStorage(storageKeys.tasks, this.tasks)
+    }
+    setTableReorder = (source: IDragCord, destination: IDragCord) => {
+        if (!destination) return
+
+        const activeTable = this.tables.find(table => table.name === this.activeTableName)
+
+        const tempTable: ITable = JSON.parse(JSON.stringify(activeTable))
+        const tempTableTasks = tempTable.tasks
+
+        const sourceItem = tempTableTasks[source.droppableId][source.index]
+
+        // Cut item from source position
+        tempTableTasks[source.droppableId].splice(source.index, 1)
+        // Paste item to destination position
+        tempTableTasks[destination.droppableId].splice(destination.index, 0, sourceItem)
+
+        activeTable.tasks = tempTableTasks
+
+        setStorage(storageKeys.tables, this.tables)
+    }
+
+
+
+    isTableExist = (tableName) => {
+        const searchedTable = this.tables.find(
+            table => table.name === tableName
+        )
+        return !!searchedTable;
     }
 
 }

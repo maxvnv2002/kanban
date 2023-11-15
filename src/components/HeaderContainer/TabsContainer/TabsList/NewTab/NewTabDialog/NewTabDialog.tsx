@@ -1,20 +1,34 @@
-import {Button, Group, Modal, TextInput} from "@mantine/core";
+import {Button, Modal, Stack, TextInput} from "@mantine/core";
 import {FC, useState} from "react";
-import tablesStore from "../../../../../store/tablesStore";
+import tablesStore from "../../../../../../store/tablesStore.ts";
+import {observer} from "mobx-react-lite";
 
 interface NewTabDialogProps {
     isOpened: boolean
     closeHandler: () => void
 }
 
-const NewTabDialog: FC<NewTabDialogProps> = ({isOpened, closeHandler }) => {
-    const {createNewTable} = tablesStore
+const NewTabDialog: FC<NewTabDialogProps> = observer(({isOpened, closeHandler }) => {
+    const {createNewTable, isTableExist} = tablesStore
+
     const [inputValue, setInputValue] = useState<string>('')
+    const [errorMessage, setErrorMessage] = useState<string>('')
 
     function buttonClickHandler() {
-        if (!inputValue) return
+        if (!inputValue) {
+            const errorEmpty = 'The input field cannot be empty'
+            setErrorMessage(errorEmpty)
+            return;
+        }
+        if (isTableExist(inputValue)) {
+            const errorExists = 'A table with this name already exists'
+            setErrorMessage(errorExists)
+            return;
+        }
 
         createNewTable(inputValue)
+
+        setErrorMessage('')
         setInputValue('')
         closeHandler()
     }
@@ -30,17 +44,19 @@ const NewTabDialog: FC<NewTabDialogProps> = ({isOpened, closeHandler }) => {
             onClose={closeHandler}
             onClick={event => event.stopPropagation()}
         >
-            <Group align={'flex-end'}>
+            <Stack align={'stretch'}>
                 <TextInput
+                    label='Table name'
                     placeholder='To do'
-                    style={{ flex: 1 }}
+
                     value={inputValue}
+                    error={errorMessage}
                     onChange={event => setInputValue(event.target.value)}
                 />
                 <Button onClick={buttonClickHandler}>Add</Button>
-            </Group>
+            </Stack>
         </Modal>
     );
-};
+});
 
 export default NewTabDialog;

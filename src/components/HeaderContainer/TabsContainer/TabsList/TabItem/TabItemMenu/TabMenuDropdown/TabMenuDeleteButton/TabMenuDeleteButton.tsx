@@ -4,7 +4,8 @@ import classes from "../TabMenuDropdown.module.scss";
 import {MenuItem, Text} from "@mantine/core";
 import {modals} from "@mantine/modals";
 import {showNotification} from "./helpers/showNotification";
-import tablesStore from "../../../../../../store/tablesStore";
+import tablesStore from "../../../../../../../../store/tablesStore.ts";
+
 
 interface TabMenuDeleteButtonProps {
     tableName: string

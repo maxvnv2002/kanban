@@ -1,3 +1,6 @@
+import {types} from "sass";
+import Null = types.Null;
+
 export type TTables = ITable[]
 
 export interface ITable {
@@ -21,8 +24,12 @@ export interface ITask {
     priority: IPriority
 }
 
-
 export interface IPriority {
     color: string,
     content: string
+}
+
+export interface IDragCord {
+    index: number | null,
+    droppableId: string | null
 }
